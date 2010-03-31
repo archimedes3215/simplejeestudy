@@ -3,6 +3,7 @@
     <wb-module deploy-name="simplejeestudy">
         <wb-resource deploy-path="/" source-path="/WebContent"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
         <property name="context-root" value="simplejeestudy"/>
         <property name="java-output-path" value="/simplejeestudy/build/classes"/>
     </wb-module>
