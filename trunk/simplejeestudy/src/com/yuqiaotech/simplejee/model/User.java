@@ -1,4 +1,4 @@
-package com.yuqiao.simplejee.model;
+package com.yuqiaotech.simplejee.model;
 
 import java.util.Date;
 

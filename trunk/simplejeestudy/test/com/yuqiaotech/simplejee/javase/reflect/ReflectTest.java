@@ -1,9 +1,9 @@
-package com.yuqiao.simplejee.javase.reflect;
+package com.yuqiaotech.simplejee.javase.reflect;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
-import com.yuqiao.simplejee.model.User;
+import com.yuqiaotech.simplejee.model.User;
 
 import static java.lang.Class.forName;
 import static org.junit.Assert.*;
@@ -51,7 +51,7 @@ public class ReflectTest {
 		u.setRealName("Tom");
 		u.setAge(12);
 		u.setGender(1);*/
-		String str = reflectionToString("com.yuqiao.simplejee.model.User");// 应该返回类似如下字符串:username:test,realName:Tom,age:12,gender:1,xxxxx
+		String str = reflectionToString("com.yuqiaotech.simplejee.model.User");// 应该返回类似如下字符串:username:test,realName:Tom,age:12,gender:1,xxxxx
 		assertTrue(str.contains("username:test"));
 		assertTrue(str.contains("realName:Tom"));
 		assertTrue(str.contains("age:12"));
