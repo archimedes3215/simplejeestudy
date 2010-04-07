@@ -3,9 +3,8 @@ package com.yuqiaotech.simplejee.javase.reflect;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
-import com.yuqiaotech.simplejee.model.User;
 
-import static java.lang.Class.forName;
+
 import static org.junit.Assert.*;
 import org.junit.Test;
 

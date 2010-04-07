@@ -1,6 +1,5 @@
 package com.yuqiaotech.simplejee.model;
 
-import java.util.Date;
 
 public class User {
 
@@ -8,10 +7,10 @@ public class User {
 	private String username;
 	private String password;
 	private String realName;
+	private String gender;
+	private int age;
+	private String birthday;
 	private String email;
-	private Integer age;
-	private Integer gender;
-	private Date birthday;
 
 	public Long getId() {
 		return id;
@@ -53,27 +52,27 @@ public class User {
 		this.email = email;
 	}
 
-	public Integer getAge() {
+	public int getAge() {
 		return age;
 	}
 
-	public void setAge(Integer age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
 
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 
-	public Integer getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(Integer gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 

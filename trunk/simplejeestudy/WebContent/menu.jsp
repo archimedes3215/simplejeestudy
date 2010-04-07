@@ -15,6 +15,9 @@
 		<li>
 			<a href="<%=request.getContextPath()%>/filterlistener/count_online.jsp">统计在线人数</a>
 		</li>
+		<li>
+			<a href="<%=request.getContextPath()%>/user/listUser">用户CRUD(struts2,jsp,jdbc)</a>
+		</li>
 	</ul>
 </body>
 </html>
