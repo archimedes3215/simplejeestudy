@@ -20,6 +20,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             padding: 3px;
         }
 </style>
+<script type="text/javascript">
+	function check(){
+		var username=form1.user.username.value;
+		if(username==""){
+			alert("用户名不能为空");
+			return false;
+		}
+	}
+</script>
 </head>
 <body>
 <div align="center"><h1>编辑用户</h1></div>
@@ -28,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <table width="515" height="303" border="1" align="center">
 	<tr>
 		<td width="190" align="right">用户名：</td>
-		<td width="309"><label> <input name="user.username"
+		<td width="309"><label> <input id="username" name="user.username"
 			type="text" id="username" value="${user.username }" /> </label></td>
 	</tr>
 	<tr>
@@ -54,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<td><input type="text" name="user.email" value="${user.email }"/></td>
 	</tr>
 	<tr>
-		<td align="center"><input type="submit" name="Submit" value="提交" /></td>
+		<td align="center"><input type="submit" name="Submit" value="提交" onclick="return check();"/></td>
 		<td align="center"><input name="Reset" type="reset" id="Reset" value="重置" /></td>
 	</tr>
 </table>
