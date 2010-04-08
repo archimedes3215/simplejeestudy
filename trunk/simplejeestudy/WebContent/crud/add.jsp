@@ -21,40 +21,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
 </style>
  <script type="text/javascript">
-    function isEmail(v){
-    	var emailPat=/^(.+)@(.+)$/;
-    	var matchArray=v.match(emailPat);
-    	if (matchArray==null) {return false;}
-    	return true;
-    }
-    function isDate(v){
-		if(v == null || v == "") return true;
-		var regex = /^(\d{4})-(\d{2})-(\d{2})$/;
-		if(!regex.test(v)){return false};
-		return true;
-    }
-
     function beforeSubmit(){
-        var email = document.getElementById("email");
-        var username = document.getElementById("username");
-        var password = document.getElementById("password");
-        var birthday = document.getElementsById("birthday");
+        //var email = document.getElementById("email");
+        var username = document.getElementsById("username");
+        //var password = document.getElementById("password");
+        //var birthday = document.getElementsById("birthday");
 
         var msgStr = "";
         var pass = true;
-		if(email.value != "" && !isEmail(email.value)){
-			msgStr+="\nemail格式不正确，aaa@bbb.com";
-			pass = false;
-		}
-		if(birthday.value != "" && !isDate(birthday.value)){
-			msgStr+="\n生日格式不正确，yyyy-MM-dd";
-			pass = false;
-		}
-		if(username.value == ""){
+    	if(username.value == ""){
 			msgStr+="\n用户名不能为空";
 			pass = false;
 		}
-
 		if(!pass)alert(msgStr);
 		return pass;
     }
@@ -63,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <div align="center"><h1>增加用户</h1></div>
 <hr/>
-<form id="form1" name="form1" method="post" action="user/addUser">
+<form id="form1" name="form1" method="post" action="user/addUser" >
 <table width="515" height="303" border="1" align="center">
 	<tr>
 		<td width="190" align="right">用户名：</td>
