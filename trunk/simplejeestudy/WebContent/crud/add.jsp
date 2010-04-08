@@ -20,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             padding: 3px;
         }
 </style>
- <script type="text/javascript">
+<script>
     function beforeSubmit(){
         //var email = document.getElementById("email");
         var username = document.getElementsById("username");
@@ -36,12 +36,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if(!pass)alert(msgStr);
 		return pass;
     }
-    </script>
+</script>
 </head>
 <body>
 <div align="center"><h1>增加用户</h1></div>
 <hr/>
-<form id="form1" name="form1" method="post" action="user/addUser" >
+<form id="form1" name="form1" method="post" action="user/addUser.action" >
 <table width="515" height="303" border="1" align="center">
 	<tr>
 		<td width="190" align="right">用户名：</td>

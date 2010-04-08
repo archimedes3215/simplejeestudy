@@ -58,11 +58,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <td>${user.email }</td>
                         
                         <td>
-                            <a href='user/prepareUpdate?user.id=${user.id }'>
+                            <a href='user/prepareUpdate.action?user.id=${user.id }'>
                                                                                       编辑
                             </a>
                             &nbsp;
-                            <a href='user/deleteUser?user.id=${user.id }'>
+                            <a href='user/deleteUser.action?user.id=${user.id }'>
                                                                                      删除
                             </a>
                         </td>
