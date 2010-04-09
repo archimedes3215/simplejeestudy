@@ -37,7 +37,7 @@ public class UserDaoJDBC implements UserDao {
 	public void insert(User user) {
 		// TODO Auto-generated method stub
 		conn = db.getConnection();
-		String sql = "insert into user(username,password,real_name,gender,age,birthday,email) values(?,?,?,?,?,?,?)";
+		String sql = "insert into user(username,password,realName,gender,age,birthday,email) values(?,?,?,?,?,?,?)";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, user.getUsername());
@@ -84,7 +84,7 @@ public class UserDaoJDBC implements UserDao {
 	public void update(User user) {
 		// TODO Auto-generated method stub
 		conn =db.getConnection();
-		String sql = "update user set username=?,password=?,real_name=?,age=?,birthday=?,email=? where id=?";
+		String sql = "update user set username=?,password=?,realName=?,age=?,birthday=?,email=? where id=?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, user.getUsername());
@@ -155,7 +155,7 @@ public class UserDaoJDBC implements UserDao {
 			user.setId(rs.getLong("id"));
 			user.setUsername(rs.getString("username"));
 			user.setPassword(rs.getString("password"));
-			user.setRealName(rs.getString("real_name"));
+			user.setRealName(rs.getString("realName"));
 			user.setGender(rs.getString("gender"));
 			user.setAge(rs.getInt("age"));
 			user.setBirthday(rs.getString("birthday"));
