@@ -1,7 +1,9 @@
 package com.yuqiaotech.simplejee.xml;
 
-import java.io.File;
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -12,13 +14,12 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
-import org.xml.sax.SAXException;
-import static org.junit.Assert.*;
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
 public class XmlTest {
 
-	String msgXml = "src/com/yuqiaotech/simplejee/model/Message.hbm.xml";
+	String msgXml = "/com/yuqiaotech/simplejee/model/Message.hbm.xml";
 
 	/**
 	 * ²Î¿¼/simplejee/src/com/yuqiaotech/simplejee/xml/SimpleSample.javaµÄ´úÂë£¬
@@ -32,16 +33,18 @@ public class XmlTest {
 			throws DocumentException {
 		String textColumnName = "";
 		try {
+			InputStream in=this.getClass().getResourceAsStream(msgXml);
 			SAXReader reader = new SAXReader();
-			Document doc = reader.read(new File(proName));
+			Document doc = reader.read(in);
 			Element root = doc.getRootElement();
+			Element foo;
 			for (Iterator i = root.elementIterator("class"); i.hasNext();) {
-				Element child = (Element) i.next();
-				for (Iterator j = child.elementIterator("property"); j
+			    foo = (Element) i.next();
+				for (Iterator j = foo.elementIterator("property"); j
 						.hasNext();) {
-					Element leaf = (Element) j.next();
-					if ("text".equals(leaf.attributeValue("name"))) {
-						textColumnName = leaf.attributeValue("column");
+					Element child = (Element) j.next();
+					if ("text".equals(child.attributeValue("name"))) {
+						textColumnName = child.attributeValue("column");
 					}
 				}
 			}
@@ -53,7 +56,7 @@ public class XmlTest {
 
 	@Test
 	public void testDom4J() throws DocumentException {
-		String textColumnName = getColumnNameByProName(msgXml);
+		String textColumnName = getColumnNameByProName("text");
 		assertTrue("MESSAGE_TEXT".equals(textColumnName));
 	}
 
@@ -61,11 +64,26 @@ public class XmlTest {
 			throws ParserConfigurationException, SAXException, IOException,
 			TransformerException {
 		String textColumnName = "";
+		InputStream in=this.getClass().getResourceAsStream(msgXml);
+/*		DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder=factory.newDocumentBuilder();
+		org.w3c.dom.Document doc=builder.parse(in);
+		org.w3c.dom.Node rtn=null;
+		org.w3c.dom.Node selectedNode=XPathAPI.selectSingleNode(doc, xPath);
+		if(selectedNode!=null){
+			NamedNodeMap namedNodeMap=selectedNode.getAttributes();
+			rtn=namedNodeMap.getNamedItem(attrName);
+			if(rtn==null){
+				return null;
+			}else{
+				textColumnName=rtn.getNodeValue();
+			}
+		}*/
 		SAXReader reader = new SAXReader();
 		try {
-			Document doc = reader.read(new File(msgXml));
-			Node n = doc.selectSingleNode("//hibernate-mapping/class" + xPath);
-			textColumnName = n.valueOf("@" + attrName);
+			Document doc = reader.read(in);
+			Node n = doc.selectSingleNode(xPath);
+			textColumnName = n.valueOf("@"+attrName);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
