@@ -12,7 +12,7 @@ public class User {
 	private String password;
 	private String realName;
 	private String gender;
-	private int age;
+	private Integer age;
 	private String birthday;
 	private String email;
 
@@ -58,11 +58,11 @@ public class User {
 		this.email = email;
 	}
 
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
 
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 
