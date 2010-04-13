@@ -1,5 +1,6 @@
 package com.yuqiaotech.simplejee.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -26,6 +27,7 @@ public class User {
 		this.id = id;
 	}
 
+	@Column(nullable=false)
 	public String getUsername() {
 		return username;
 	}

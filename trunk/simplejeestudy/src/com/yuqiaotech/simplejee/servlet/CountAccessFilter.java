@@ -24,7 +24,49 @@ public class CountAccessFilter implements Filter {
 	private Map<String, Integer> statMap;
 
 	public void destroy() {
-		this.destroy();
+		Set<Map.Entry<String, Integer>> entries = statMap.entrySet();
+		List<Map.Entry<String, Integer>> entriesList = new ArrayList<Entry<String, Integer>>();
+		entriesList.addAll(entries);
+		Collections.sort(entriesList,
+				new Comparator<Map.Entry<String, Integer>>() {
+					public int compare(Entry<String, Integer> o1,
+							Entry<String, Integer> o2) {
+						return o2.getValue().compareTo(o1.getValue());
+					}
+				});
+		// 将统计数据存到文件中
+		FileWriter fw = null;
+		BufferedWriter bw = null;
+		try {
+			fw = new FileWriter("D:\\CountAccess.txt");
+			bw = new BufferedWriter(fw);
+			for (Map.Entry<String, Integer> map : entriesList) {
+				bw.write(map.getKey() + "=" + map.getValue());
+				bw.newLine();
+			}
+			bw.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (fw != null) {
+				try {
+					fw.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (bw != null) {
+				try {
+					bw.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response,
@@ -37,7 +79,7 @@ public class CountAccessFilter implements Filter {
 			clicks = 0;
 		clicks++;
 		statMap.put(uri, clicks);
-		//判断是否进入排序页面
+		// 判断是否进入排序页面
 		if (uri.endsWith("/count_access_show")) {
 			// 取出所有的Map
 			Set<Map.Entry<String, Integer>> entries = statMap.entrySet();
@@ -52,22 +94,11 @@ public class CountAccessFilter implements Filter {
 							return o2.getValue().compareTo(o1.getValue());
 						}
 					});
-			// 将统计数据存到文件中
-			FileWriter fw = new FileWriter("D:\\CountAccess.txt");
-			BufferedWriter bw = new BufferedWriter(fw);
-			for (Map.Entry<String, Integer> map : entriesList) {
-				bw.write("uri:" + map.getKey());
-				bw.newLine();
-				bw.write("accesstimes:" + map.getValue());
-				bw.newLine();
-				bw.newLine();
-			}
-			bw.flush();
-			fw.close();
-			bw.close();
+
 			request.setAttribute("entriesList", entriesList);
-			request.getRequestDispatcher("/filterlistener/count_access_show.jsp").forward(
-					request, response);
+			request.getRequestDispatcher(
+					"/filterlistener/count_access_show.jsp").forward(request,
+					response);
 		} else {
 			chain.doFilter(request, response);
 		}

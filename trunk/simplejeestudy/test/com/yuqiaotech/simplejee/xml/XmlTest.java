@@ -37,15 +37,12 @@ public class XmlTest {
 			SAXReader reader = new SAXReader();
 			Document doc = reader.read(in);
 			Element root = doc.getRootElement();
-			Element foo;
-			for (Iterator i = root.elementIterator("class"); i.hasNext();) {
+			Element classEle=root.element("class");
+			Element foo=null;
+			for (Iterator i = classEle.elementIterator("property"); i.hasNext();) {
 			    foo = (Element) i.next();
-				for (Iterator j = foo.elementIterator("property"); j
-						.hasNext();) {
-					Element child = (Element) j.next();
-					if ("text".equals(child.attributeValue("name"))) {
-						textColumnName = child.attributeValue("column");
-					}
+			    if ("text".equals(foo.attributeValue("name"))) {
+					textColumnName = foo.attributeValue("column");
 				}
 			}
 		} catch (Exception e) {
