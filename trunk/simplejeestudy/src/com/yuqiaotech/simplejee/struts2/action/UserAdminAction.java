@@ -17,9 +17,9 @@ public class UserAdminAction extends ActionSupport {
 	private User user;
 	private List<User> users;
 	//Hibernate实现
-	private UserDao userDao = UserDaoFactory.getUserDaoHibernate();
+	//private UserDao userDao = UserDaoFactory.getUserDaoHibernate();
 	//JDBC实现
-	//private UserDao userDao = UserDaoFactory.getUserDaoJDBC();
+	private UserDao userDao = UserDaoFactory.getUserDaoJDBC();
 
 	public String add() {
 		userDao.insert(user);

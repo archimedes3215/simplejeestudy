@@ -1,6 +1,8 @@
 package com.yuqiaotech.simplejee.servlet;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,8 +39,9 @@ public class CountAccessFilter implements Filter {
 		// 将统计数据存到文件中
 		FileWriter fw = null;
 		BufferedWriter bw = null;
+		String url = this.getClass().getResource("").toString().substring(6);
 		try {
-			fw = new FileWriter("D:\\CountAccess.txt");
+			fw = new FileWriter(url + "CountAccess.txt");
 			bw = new BufferedWriter(fw);
 			for (Map.Entry<String, Integer> map : entriesList) {
 				bw.write(map.getKey() + "=" + map.getValue());
@@ -106,6 +109,40 @@ public class CountAccessFilter implements Filter {
 
 	public void init(FilterConfig fConfig) throws ServletException {
 		statMap = new Hashtable<String, Integer>();
+		FileReader fr = null;
+		BufferedReader br = null;
+		String url = this.getClass().getResource("").toString().substring(6);
+		try {
+			fr = new FileReader(url + "CountAccess.txt");
+			br = new BufferedReader(fr);
+			String line=null;
+			while ((line=br.readLine()) != null) {
+				int i = line.indexOf("=");
+				String key = line.substring(0, i);
+				int value = Integer.parseInt(line.substring(i + 1));
+				statMap.put(key, value);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (fr != null) {
+				try {
+					fr.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 		fConfig.getServletContext().setAttribute("simpleClickstreamMap",
 				statMap);
 	}
