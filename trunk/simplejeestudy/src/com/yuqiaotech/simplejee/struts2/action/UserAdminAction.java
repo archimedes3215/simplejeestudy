@@ -2,11 +2,24 @@ package com.yuqiaotech.simplejee.struts2.action;
 
 import java.util.List;
 
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.yuqiaotech.simplejee.dao.UserDao;
 import com.yuqiaotech.simplejee.dao.UserDaoFactory;
 import com.yuqiaotech.simplejee.model.User;
-
+@Namespace("/user")
+@Action("userAdmin")
+@Results({
+	@Result(name="list",location="/crud/list.jsp"),
+	@Result(name="add",location="userAdmin",type="chain",params={"method","list"}),
+	@Result(name="delete",location="userAdmin",type="chain",params={"method","list"}),
+	@Result(name="update",location="userAdmin",type="chain",params={"method","list"}),
+	@Result(name="prepareUpdate",location="/crud/edit.jsp")
+})
 public class UserAdminAction extends ActionSupport {
 
 	/**
@@ -18,6 +31,7 @@ public class UserAdminAction extends ActionSupport {
 	private List<User> users;
 	//Hibernate实现
 	//private UserDao userDao = UserDaoFactory.getUserDaoHibernate();
+	
 	//JDBC实现
 	private UserDao userDao = UserDaoFactory.getUserDaoJDBC();
 
@@ -40,9 +54,10 @@ public class UserAdminAction extends ActionSupport {
 		this.users=userDao.queryAll();
 		return "list";
 	}
+	
 	public String prepareUpdate(){
 		user=userDao.get(user.getId());
-		return SUCCESS;
+		return "prepareUpdate";
 	}
 
 	public User getUser() {
@@ -60,5 +75,6 @@ public class UserAdminAction extends ActionSupport {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
+	
 
 }

@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <div align="center"><h1>增加用户</h1></div>
 <hr/>
-<form id="form1" name="form1" method="post" action="user/addUser.action" >
+<form id="form1" name="form1" method="post" action="user/userAdmin!add.action" >
 <table width="515" height="303" border="1" align="center">
 	<tr>
 		<td width="190" align="right">用户名：</td>
