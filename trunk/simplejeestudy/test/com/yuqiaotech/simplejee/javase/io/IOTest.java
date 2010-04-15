@@ -12,7 +12,7 @@ public class IOTest {
 		String user_home = System.getProperty("user.home");
 		System.out.println("user_home" + user_home);
 		File f = new File(user_home
-				+ "\\Local Settings\\Temporary Internet Files");
+				+ "\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files");
 		iterator(f, "");
 	}
 
