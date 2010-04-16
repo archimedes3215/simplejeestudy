@@ -35,9 +35,7 @@ public class ReflectTest {
 		String realName=(String) data.get("realName");
 		Integer age=(Integer) data.get("age");
 		String gender=(String) data.get("gender");
-		//o.getClass().toString()之后的结果是：class com.yuqiaotech.simplejee.model.User
-		//所以要取6之后的字符串
-		className = o.getClass().toString().substring(6);
+		className = o.getClass().getName();
 		try {
 			Class clazz = Class.forName(className);
 			//Constructor c = clazz.getConstructor();
