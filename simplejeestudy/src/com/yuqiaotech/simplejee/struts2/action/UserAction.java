@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 import com.opensymphony.xwork2.ActionSupport;
 import com.yuqiaotech.simplejee.dao.UserDao;
 import com.yuqiaotech.simplejee.model.User;
-
 @Component("userAction")
 @Scope("prototype")
 @Namespace("/user")
@@ -38,7 +37,7 @@ public class UserAction extends ActionSupport {
 	private User user;
 	private List<User> users;
 	private UserDao userDao;
-
+	
 	public String add() {
 		userDao.insert(user);
 		return "add";
