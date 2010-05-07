@@ -24,15 +24,14 @@ public class UserDaoHibernate implements UserDao {
 	@Override
 	public User findByUsername(String username) {
 		// TODO Auto-generated method stub
-		User user = (User) hibernateTemplate.find(
+		List<User> users = hibernateTemplate.find(
 				"from User u where u.username=?", new Object[] { username });
-		return user;
+		return users.get(0);
 	}
 
 	@Override
 	public User get(Long id) {
-		User user = (User) hibernateTemplate.get(User.class, id);
-		return user;
+		return (User) hibernateTemplate.get(User.class, id);
 	}
 
 	@Override
@@ -43,8 +42,7 @@ public class UserDaoHibernate implements UserDao {
 	@Override
 	public List<User> queryAll() {
 		// TODO Auto-generated method stub
-		List<User> users = hibernateTemplate.find("from User");
-		return users;
+		return hibernateTemplate.find("from User");
 	}
 
 	@Override

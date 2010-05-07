@@ -21,7 +21,7 @@ public class UserDaoTest {
 	@Test
 	public void testInsert() {
 		User user = new User();
-		user.setUsername("user1");
+		user.setUsername("zhao");
 		user.setPassword("123456");
 		user.setRealName("едед");
 		user.setGender("Фа");
@@ -33,7 +33,8 @@ public class UserDaoTest {
 	
 	@Test
 	public void testFindByUsername(){
-		User user=ud.findByUsername("user1");
+		User user=ud.findByUsername("zhao");
 		assertThat(user.getRealName(), is("едед"));
+		ud.delete(user.getId());
 	}
 }
