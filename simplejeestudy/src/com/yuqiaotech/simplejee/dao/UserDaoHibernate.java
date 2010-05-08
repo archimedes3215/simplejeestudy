@@ -1,69 +1,45 @@
 package com.yuqiaotech.simplejee.dao;
 
 import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.springframework.orm.hibernate3.HibernateTemplate;
-import org.springframework.stereotype.Component;
-
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.yuqiaotech.simplejee.model.User;
 
-@Component("userDaoHibernate")
-public class UserDaoHibernate implements UserDao {
-
-	private HibernateTemplate hibernateTemplate;
-
+public class UserDaoHibernate extends HibernateDaoSupport implements UserDao {
+	
 	@Override
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
-		User user = (User) hibernateTemplate.get(User.class, id);
-		hibernateTemplate.delete(user);
+		User user = (User) this.getHibernateTemplate().get(User.class, id);
+		this.getHibernateTemplate().delete(user);
 	}
 
 	@Override
 	public User findByUsername(String username) {
 		// TODO Auto-generated method stub
-		List<User> users = hibernateTemplate.find(
+		List<User> users = this.getHibernateTemplate().find(
 				"from User u where u.username=?", new Object[] { username });
 		return users.get(0);
 	}
 
 	@Override
 	public User get(Long id) {
-		return (User) hibernateTemplate.get(User.class, id);
+		return (User) this.getHibernateTemplate().get(User.class, id);
 	}
 
 	@Override
 	public void insert(User user) {
-		hibernateTemplate.save(user);
+		this.getHibernateTemplate().save(user);
 	}
 
 	@Override
 	public List<User> queryAll() {
 		// TODO Auto-generated method stub
-		return hibernateTemplate.find("from User");
+		return this.getHibernateTemplate().find("from User");
 	}
 
 	@Override
 	public void update(User user) {
-		hibernateTemplate.update(user);
-	}
-
-	/**
-	 * @return the hibernateTemplate
-	 */
-	public HibernateTemplate getHibernateTemplate() {
-		return hibernateTemplate;
-	}
-
-	/**
-	 * @param hibernateTemplate
-	 *            the hibernateTemplate to set
-	 */
-	@Resource
-	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-		this.hibernateTemplate = hibernateTemplate;
+		this.getHibernateTemplate().update(user);
 	}
 
 }

@@ -2,20 +2,16 @@ package com.yuqiaotech.simplejee.struts2.action;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.yuqiaotech.simplejee.dao.UserDao;
 import com.yuqiaotech.simplejee.model.User;
-@Component("userAction")
-@Scope("prototype")
 @Namespace("/user")
 @Action("userAction")
 @Results( {
@@ -33,7 +29,6 @@ public class UserAction extends ActionSupport {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 	private User user;
 	private List<User> users;
 	private UserDao userDao;
@@ -90,7 +85,6 @@ public class UserAction extends ActionSupport {
 	 * @param userDao
 	 *            the userDao to set
 	 */
-	@Resource(name = "userDaoHibernate")
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
