@@ -1,6 +1,7 @@
 package com.yuqiaotech.simplejee.dao;
 
 import java.util.List;
+
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.yuqiaotech.simplejee.model.User;
 

@@ -53,4 +53,30 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	
+	<bean id="userAction" class="com.yuqiaotech.simplejee.struts2.action.UserAction">
+	</bean>
+	
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="bussinessService"
+			expression="execution(public * com.yuqiaotech.simplejee.dao.UserDaoHibernate.*(..))" />
+		<aop:advisor pointcut-ref="bussinessService"
+			advice-ref="txAdvice" />
+	</aop:config>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="queryAll" read-only="true" />
+			<tx:method name="get" read-only="true"/>
+			<tx:method name="findByUsername" read-only="true"/>
+			<tx:method name="insert" propagation="REQUIRED"/>
+			<tx:method name="delete" propagation="REQUIRED"/>
+			<tx:method name="update" propagation="REQUIRED"/>
+		</tx:attributes>
+	</tx:advice>
+	
 </beans>
